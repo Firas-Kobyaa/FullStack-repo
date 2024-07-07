@@ -1,0 +1,6 @@
+[submodule "Front-repo"]
+	path = Front-repo
+	url = https://github.com/Firas-Kobyaa/Front-repo.git
+[submodule "Back-repo"]
+	path = Back-repo
+	url = https://github.com/Firas-Kobyaa/Back-repo.git
