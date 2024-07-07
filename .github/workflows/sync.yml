@@ -3,7 +3,7 @@ name: Sync Submodules
 on:
   push:
     branches:
-      - main  # or your main branch
+      - main
     paths:
       - 'Front-repo/**'
       - 'Back-repo/**'
@@ -30,10 +30,13 @@ jobs:
           git pull origin main
           cd ..
 
+      - name: Add Submodules Changes
+        run: |
+          git add Front-repo Back-repo
+
       - name: Commit and Push Changes
         run: |
-          git config --global user.name 'Firas-Kobyaa'
-          git config --global user.email 'firaskobyaa@outlook.com'
-          git add .
+          git config --global user.name '${{ secrets.MY_GITHUB_ACTOR }}'
+          git config --global user.email '${{ secrets.MY_GITHUB_ACTOR_EMAIL }}'
           git commit -m "Sync submodules"
           git push origin main
