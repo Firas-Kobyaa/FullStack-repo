@@ -1,0 +1,39 @@
+name: Sync Submodules
+
+on:
+  push:
+    branches:
+      - main  # or your main branch
+    paths:
+      - 'Front-repo/**'
+      - 'Back-repo/**'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout FullStack Repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Pull Updates from Front-repo
+        run: |
+          cd Front-repo
+          git pull origin main
+          cd ..
+
+      - name: Pull Updates from Back-repo
+        run: |
+          cd Back-repo
+          git pull origin main
+          cd ..
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'Firas-Kobyaa'
+          git config --global user.email 'firaskobyaa@outlook.com'
+          git add .
+          git commit -m "Sync submodules"
+          git push origin main
